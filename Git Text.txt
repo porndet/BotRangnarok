@@ -1,4 +1,11 @@
+1.
+Ctrl+Shift+P -> Git: Initialize repository -> Project name
+
+2.
 git add . 
 git commit -m "first commit"
-git remote add origin https://github.com/porndet/BotRangnarok.git
+git remote add origin https://github.com/porndet/ExpressJS-MongoDB.git
 git push -u origin master
+
+3. Update github
+new commit
