@@ -8,7 +8,7 @@ import keyboard
 import pyscreeze
 from win32gui import FindWindow, GetWindowRect, GetForegroundWindow
 
-Noxplayer = FindWindow(None, "NoxPlayer")
+Noxplayer = FindWindow(None, "NoxPlayer1")
 left, top, width, height  = GetWindowRect(Noxplayer)
 print(left, top, width, height)
 
