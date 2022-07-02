@@ -8,7 +8,7 @@ from array import *
 import pyscreeze
 from win32gui import FindWindow, GetWindowRect
 
-Noxplayer = FindWindow(None, "NoxPlayer1")
+Noxplayer = FindWindow(None, "NoxPlayer")
 left, top, width, height  = GetWindowRect(Noxplayer)
 
 def ClickPoring():

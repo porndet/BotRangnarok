@@ -1,0 +1,10 @@
+pip install opencv-python
+pip install PyAutoGUI
+pip install numpy
+pip install PyScreeze
+pip install win32gui
+pip install pytesseract
+pip install tesseract
+pip install mss
+pip install keyboard
+pip install pywin32

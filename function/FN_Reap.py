@@ -11,7 +11,7 @@ custom_config = r'--psm 6 --oem 3 -c tessedit_char_whitelist=0123456789+-*'
 path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 pytesseract.pytesseract.tesseract_cmd = path_to_tesseract
 
-Noxplayer = FindWindow(None, "NoxPlayer1")
+Noxplayer = FindWindow(None, "NoxPlayer")
 left, top, width, height  = GetWindowRect(Noxplayer)
 print(left, top, width, height)
 
