@@ -100,7 +100,8 @@ def ClickMenuConfirm():
         w = ConfirmQuest_Image.shape[1]
         h = ConfirmQuest_Image.shape[0]
         # print(min_val, max_val, min_loc, max_loc, w, h)
-        if(max_val >= 0.85):
+        print(max_val)
+        if(max_val >= 0.65):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
 
@@ -319,12 +320,11 @@ if(GetQuestMissionBoard() == True):
         ClickMenuConfirm()
         CommunicationQuest += 1
     else:
-        print("Get Quest Communication Success")
-        # if(CommunicationCondition(CommunicationQuest)):
-        #     ComunicationLocationClick += [[921, 285, 0, 0]]
-        #     CommunicationQuest += 1
-        # else:
-        #     print("Get Quest Communication Success")
+        if(CommunicationCondition(CommunicationQuest)):
+            ComunicationLocationClick += [[921, 285, 0, 0]]
+            CommunicationQuest += 1
+        else:
+            print("Get Quest Communication Success")
 
     result = cv2.matchTemplate(QuestBoardMission_img, CropQuest_img, cv2.TM_CCOEFF_NORMED)
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
@@ -404,7 +404,7 @@ if(GetQuestMissionBoard() == True):
             i += 1
     else:
         print("Complete Comunication")
-        ClickxyQuest[1] += 48
+        # ClickxyQuest[1] += 48
 
     for i in range(CropQuest):
         GetGoNextMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
@@ -464,11 +464,11 @@ if(GetQuestMissionBoard() == True):
         pyautogui.click(828, 576, interval = 1)
         GoMissonBoard()
 
-        # for i in range(len(AttackLocationClick)):
-        #     pyautogui.click(AttackLocationClick[i])
-        #     SendQuestMssion()
-        # else:
-        #     print("Send Quest Attack Success")
+        for i in range(len(AttackLocationClick)):
+            pyautogui.click(AttackLocationClick[i])
+            SendQuestMssion()
+        else:
+            print("Send Quest Attack Success")
 
     # for i in range(AttackQuest):
     #     if x_lengthQuest < lengthQuest:

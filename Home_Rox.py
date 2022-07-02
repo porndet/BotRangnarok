@@ -20,7 +20,7 @@ def SendQuestMssion():
 # while True :
 #     SendQuestMssion()
 
-import COCMission_Rox
+# import COCMission_Rox
 import MissionBoard_Rox
 
 # import MissionBoardLike_Rox
