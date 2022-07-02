@@ -10,6 +10,7 @@ from win32gui import FindWindow, GetWindowRect
 
 Noxplayer = FindWindow(None, "NoxPlayer")
 left, top, width, height  = GetWindowRect(Noxplayer)
+print(left, top, width, height)
 
 def ClickPoring():
     sct = mss.mss()
