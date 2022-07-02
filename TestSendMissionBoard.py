@@ -166,7 +166,7 @@ def GoQuestMissionBoardNew():
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
         w = GoQuestMissionBoard_Image.shape[1]
         h = GoQuestMissionBoard_Image.shape[0]
-        #print(min_val, max_val, min_loc, max_loc, w, h)
+        print(min_val, max_val, min_loc, max_loc, w, h)
         if(max_val >= 0.85):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
@@ -282,225 +282,32 @@ def SendQuestMssion():
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
         w = CheckQuest_Image.shape[1]
         h = CheckQuest_Image.shape[0]
-        if(max_val >= 0.75):
+        if(max_val >= 0.85):
             time.sleep(1)
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
+        
 
-time.sleep(1)
-GoMissonBoard()
-if(GetQuestMissionBoard() == True):
-    time.sleep(2)
-    im3 = pyscreeze.screenshot(region = (left, top, width - left, height - top))
-    im3.save(r"Image/Board/Missionboard.png")
+# ClickQuestNew = [157, 277]
+# pyautogui.click(ClickQuestNew, interval = 1)
+# time.sleep(300)
 
-    QuestBoardMission_img = cv2.imread('Image/Board/Missionboard.png', cv2.IMREAD_UNCHANGED)
-    IconCommunication_img = cv2.imread('Image/Board/QuestCommunication.png', cv2.IMREAD_UNCHANGED)
-    CropQuest_img = cv2.imread('Image/Board/QuestCrop.png', cv2.IMREAD_UNCHANGED)
-    AttackQuest_img = cv2.imread('Image/Board/QuestAttackMission.png', cv2.IMREAD_UNCHANGED)
-
-    result = cv2.matchTemplate(QuestBoardMission_img, IconCommunication_img, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    w = IconCommunication_img.shape[1]
-    h = IconCommunication_img.shape[0]
-
-    CommunicationQuest = 0
-    CommunicationArray = []
-    ComunicationLocationClick = [[]]
-    threshold = 0.85
-    yloc, xloc = np.where(result >= threshold)
-    for (x, y) in zip(xloc, yloc):
-        CommunicationArray.append([int(x), int(y), int(w), int(h)])
-
-    CommunicationLocation, weights = cv2.groupRectangles(CommunicationArray, 1, 1)
-    for (x, y, w, h) in CommunicationLocation:
-        pyautogui.click(x = x + (w / 2), y = y + top + (h / 2), interval = 0.5)
-        ComunicationLocationClick += [[x, y, w, h]]
-        ClickMenuConfirm()
-        CommunicationQuest += 1
-    else:
-        print("Get Quest Communication Success")
-        # if(CommunicationCondition(CommunicationQuest)):
-        #     ComunicationLocationClick += [[921, 285, 0, 0]]
-        #     CommunicationQuest += 1
-        # else:
-        #     print("Get Quest Communication Success")
-
-    result = cv2.matchTemplate(QuestBoardMission_img, CropQuest_img, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    w = CropQuest_img.shape[1]
-    h = CropQuest_img.shape[0]
-
-    CropQuest = 0
-    CropQuestArray = []
-    threshold = 0.85
-    CropLocationClick = [[]]
-    yloc, xloc = np.where(result >= threshold)
-    for (x, y) in zip(xloc, yloc):
-        CropQuestArray.append([int(x), int(y), int(w), int(h)])
-
-    CropLocation, weights = cv2.groupRectangles(CropQuestArray, 1, 1)
-    for (x, y, w, h) in CropLocation:
-        pyautogui.click(x = x + (w / 2), y = y + top + (h / 2), interval = 0.5)
-        CropLocationClick += [[x, y, w, h]]
-        ClickMenuConfirm()
-        CropQuest += 1
-    else:
-        if(CropCondition(CropQuest)):
-            CropLocationClick += [[921, 285, 0, 0]]
-            CropQuest += 1
-        else:
-            print("Get Quest Crop Success")
-    
-    result = cv2.matchTemplate(QuestBoardMission_img, AttackQuest_img, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    w = AttackQuest_img.shape[1]
-    h = AttackQuest_img.shape[0]
-
-    AttackQuest = 0
-    AttackQuestArray = []
-    AttackLocationClick = [[]]
-    threshold = 0.85
-    yloc, xloc = np.where(result >= threshold)
-    for (x, y) in zip(xloc, yloc):
-        AttackQuestArray.append([int(x), int(y), int(w), int(h)])
-
-    AttackLocation, weights = cv2.groupRectangles(AttackQuestArray, 1, 1)
-    for (x, y, w, h) in AttackLocation:
-        pyautogui.click(x = x + (w / 2), y = y + top + (h / 2), interval = 0.5)
-        AttackLocationClick += [[x, y, w, h]]
-        ClickMenuConfirm()
-        AttackQuest += 1
-    else:
-        if(AttackCondition(AttackQuest)):
-            AttackLocationClick += [[921, 285, 0, 0]]
-            AttackQuest += 1
-        else:
-            print("Get Quest Attack Success")
-
-    CancelMssionBoard()
-    time.sleep(1)
-
-    # Notcomunication_Npc = input("เควสไม่ต้องคุย NPC : ")
-    # if(Notcomunication_Npc == '8'):
-    #     Notcomunication_Npc = '1 2 3 4 5 6'
-    # NumberQuest = Notcomunication_Npc.split(' ')
-    # lengthQuest = len(NumberQuest)
-    # x_lengthQuest = 0
-
-    ClcikQuest = [157, 277]
-    pyautogui.click(x = ClcikQuest[0], y = ClcikQuest[1], interval = 0.5)
-    NextCommunicationNPC()
-    ClickxyQuest = [340, 185]
-
-    for i in range(CommunicationQuest):
-        if(i == 0):
-            GetGoNextMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
-            ClickxyQuest[1] += 48
-            i += 1
-        else:
-            for i in range(2):
-                GetGoNextMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
-            i += 1
-    else:
-        print("Complete Comunication")
-        ClickxyQuest[1] += 48
-
-    for i in range(CropQuest):
-        GetGoNextMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
-        GetGoMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
-        CropRox()
-        time.sleep(2)
-        GetGoNextMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
-        ClickxyQuest[1] += 48
-        i += 1
-    else:
-        print("Complete Crop")
-
-    
-    time.sleep(2)
-    GoMissonBoard()
-    
-    ComunicationLocationClick.pop(0)
-    CropLocationClick.pop(0)
-    AttackLocationClick.pop(0)
-
-    for i in range(len(ComunicationLocationClick)):
-        pyautogui.click(ComunicationLocationClick[i])
-        SendQuestMssion()
-    else:
-        print("Send Quest Comunication Success")
-
-    for i in range(len(CropLocationClick)):
-        pyautogui.click(CropLocationClick[i])
-        SendQuestMssion()
-    else:
-        print("Send Quest Crop Success")   
-
-    CancelMssionBoard()
-    time.sleep(2)
-
-    ClickQuestNew = [157, 277]
-    pyautogui.click(ClickQuestNew, interval = 1)
-    time.sleep(300)
-
-    def AttackQuestMission(x, ClickTrue):
-        if ClickTrue == True:
-            pyautogui.click(828, 576, interval = 1)
-        GetQuestMissionBoard1()
-        time.sleep(1)
-        pyautogui.click(x, interval = 1)
-        if GoQuestMissionBoardNew == True:
-            time.sleep(300)
-            return True
-        else:
-            AttackQuestMission(x, False)
-
-    AttackQuestXY = [340, 233]
-    for i in range(6):
-        AttackQuestMission(AttackQuestXY, True)
-        AttackQuestXY[1] += 48
-    else:
+def AttackQuestMission(x, ClickTrue):
+    if ClickTrue == True:
         pyautogui.click(828, 576, interval = 1)
-        GoMissonBoard()
+    GetQuestMissionBoard1()
+    time.sleep(1)
+    pyautogui.click(x, interval = 1)
+    if GoQuestMissionBoardNew() == True:
+        time.sleep(300)
+        return True
+    else:
+        AttackQuestMission(x, False)
 
-        # for i in range(len(AttackLocationClick)):
-        #     pyautogui.click(AttackLocationClick[i])
-        #     SendQuestMssion()
-        # else:
-        #     print("Send Quest Attack Success")
-
-    # for i in range(AttackQuest):
-    #     if x_lengthQuest < lengthQuest:
-    #         if(i == int(NumberQuest[x_lengthQuest]) - 1):
-    #             x_lengthQuest += 1
-    #             ClickxyQuest[1] += 48
-    #             i += 1
-    #         else:
-    #             if(i == 5):
-    #                 time.sleep(0.3)
-    #                 ClickQuestCOC = [153, 342]
-    #                 pyautogui.click(x = ClickQuestCOC[0], y = ClickQuestCOC[1], interval = 0.5)
-    #                 time.sleep(0.3)
-    #                 keyboardS()
-    #                 GetGoNextMissionBoard(ClickxyQuest[0], (ClickxyQuest[1] - 48))
-    #                 i += 1
-    #             else:
-    #                 GetGoNextMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
-    #                 ClickxyQuest[1] += 48
-    #                 i += 1
-    #     else:
-    #         if(i == 5):
-    #             time.sleep(0.3)
-    #             ClickQuestCOC = [153, 342]
-    #             pyautogui.click(x = ClickQuestCOC[0], y = ClickQuestCOC[1], interval = 0.5)
-    #             time.sleep(0.3)
-    #             keyboardS()
-    #             GetGoNextMissionBoard(ClickxyQuest[0], (ClickxyQuest[1] - 48))
-    #             i += 1
-    #         else:
-    #             GetGoNextMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
-    #             ClickxyQuest[1] += 48
-    #             i += 1
-    # else:
-    #     print("Complete Attack")
+AttackQuestXY = [340, 233]
+for i in range(6):
+    AttackQuestMission(AttackQuestXY, True)
+    AttackQuestXY[1] += 48
+else:
+    pyautogui.click(828, 576, interval = 1)
+    GoMissonBoard()
