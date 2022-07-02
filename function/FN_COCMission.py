@@ -43,7 +43,7 @@ def py_locateOnscreennoclick(name):
         r = pyautogui.locateOnScreen('Image/' + name, region=(left, top, width - left, height - top), grayscale = True, confidence=.8)
 
 def COC_Mission():
-    # py_locateOnscreen("COC/Poring_Open.png")
+    py_locateOnscreen("COC/Poring_Open.png")
     py_locateOnscreen("COC/Canival.png")
     py_locateOnscreen("COC/COCMission.png")
     py_locateOnscreen("COC/GO_immediately.png")

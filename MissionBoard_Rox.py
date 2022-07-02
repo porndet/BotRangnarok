@@ -381,13 +381,6 @@ if(GetQuestMissionBoard() == True):
     CancelMssionBoard()
     time.sleep(1)
 
-    # Notcomunication_Npc = input("เควสไม่ต้องคุย NPC : ")
-    # if(Notcomunication_Npc == '8'):
-    #     Notcomunication_Npc = '1 2 3 4 5 6'
-    # NumberQuest = Notcomunication_Npc.split(' ')
-    # lengthQuest = len(NumberQuest)
-    # x_lengthQuest = 0
-
     ClcikQuest = [157, 277]
     pyautogui.click(x = ClcikQuest[0], y = ClcikQuest[1], interval = 0.5)
     NextCommunicationNPC()
@@ -404,7 +397,7 @@ if(GetQuestMissionBoard() == True):
             i += 1
     else:
         print("Complete Comunication")
-        # ClickxyQuest[1] += 48
+        ClickxyQuest[1] += 48
 
     for i in range(CropQuest):
         GetGoNextMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
