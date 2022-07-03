@@ -288,6 +288,26 @@ def SendQuestMssion():
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
 
+ 
+def AttackQuestMission(x):
+    pyautogui.click(828, 576, interval = 1)
+    GetQuestMissionBoard1()
+    time.sleep(1)
+    pyautogui.click(x, interval = 1)
+    if GoQuestMissionBoardNew() == True:
+        time.sleep(300)
+        return True
+    else:
+        AttackQuestMission1(x)
+        return True
+
+def AttackQuestMission1(x):
+    GetQuestMissionBoard1()
+    time.sleep(1)
+    pyautogui.click(x, interval = 1)
+    GoQuestMissionBoard()    
+    return True       
+
 time.sleep(1)
 GoMissonBoard()
 if(GetQuestMissionBoard() == True):
@@ -437,21 +457,9 @@ if(GetQuestMissionBoard() == True):
     pyautogui.click(ClickQuestNew, interval = 1)
     time.sleep(300)
 
-    def AttackQuestMission(x, ClickTrue):
-        if ClickTrue == True:
-            pyautogui.click(828, 576, interval = 1)
-        GetQuestMissionBoard1()
-        time.sleep(1)
-        pyautogui.click(x, interval = 1)
-        if GoQuestMissionBoardNew == True:
-            time.sleep(300)
-            return True
-        else:
-            AttackQuestMission(x, False)
-
     AttackQuestXY = [340, 233]
     for i in range(6):
-        AttackQuestMission(AttackQuestXY, True)
+        AttackQuestMission(AttackQuestXY)
         AttackQuestXY[1] += 48
     else:
         pyautogui.click(828, 576, interval = 1)
