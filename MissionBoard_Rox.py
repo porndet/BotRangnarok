@@ -438,70 +438,36 @@ if(GetQuestMissionBoard() == True):
     CropLocationClick.pop(0)
     AttackLocationClick.pop(0)
 
-    for i in range(len(ComunicationLocationClick)):
-        pyautogui.click(ComunicationLocationClick[i])
-        SendQuestMssion()
-    else:
-        print("Send Quest Comunication Success")
-
-    for i in range(len(CropLocationClick)):
-        pyautogui.click(CropLocationClick[i])
-        SendQuestMssion()
-    else:
-        print("Send Quest Crop Success")   
-
-    CancelMssionBoard()
-    time.sleep(2)
-
-    ClickQuestNew = [157, 277]
-    pyautogui.click(ClickQuestNew, interval = 1)
-    time.sleep(300)
-
-    AttackQuestXY = [340, 233]
-    for i in range(6):
-        AttackQuestMission(AttackQuestXY)
-        AttackQuestXY[1] += 48
-    else:
-        pyautogui.click(828, 576, interval = 1)
-        GoMissonBoard()
-
-        for i in range(len(AttackLocationClick)):
-            pyautogui.click(AttackLocationClick[i])
+    if GetQuestMissionBoard() == True:
+        for i in range(len(ComunicationLocationClick)):
+            pyautogui.click(ComunicationLocationClick[i])
             SendQuestMssion()
         else:
-            print("Send Quest Attack Success")
+            print("Send Quest Comunication Success")
 
-    # for i in range(AttackQuest):
-    #     if x_lengthQuest < lengthQuest:
-    #         if(i == int(NumberQuest[x_lengthQuest]) - 1):
-    #             x_lengthQuest += 1
-    #             ClickxyQuest[1] += 48
-    #             i += 1
-    #         else:
-    #             if(i == 5):
-    #                 time.sleep(0.3)
-    #                 ClickQuestCOC = [153, 342]
-    #                 pyautogui.click(x = ClickQuestCOC[0], y = ClickQuestCOC[1], interval = 0.5)
-    #                 time.sleep(0.3)
-    #                 keyboardS()
-    #                 GetGoNextMissionBoard(ClickxyQuest[0], (ClickxyQuest[1] - 48))
-    #                 i += 1
-    #             else:
-    #                 GetGoNextMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
-    #                 ClickxyQuest[1] += 48
-    #                 i += 1
-    #     else:
-    #         if(i == 5):
-    #             time.sleep(0.3)
-    #             ClickQuestCOC = [153, 342]
-    #             pyautogui.click(x = ClickQuestCOC[0], y = ClickQuestCOC[1], interval = 0.5)
-    #             time.sleep(0.3)
-    #             keyboardS()
-    #             GetGoNextMissionBoard(ClickxyQuest[0], (ClickxyQuest[1] - 48))
-    #             i += 1
-    #         else:
-    #             GetGoNextMissionBoard(ClickxyQuest[0], ClickxyQuest[1])
-    #             ClickxyQuest[1] += 48
-    #             i += 1
-    # else:
-    #     print("Complete Attack")
+        for i in range(len(CropLocationClick)):
+            pyautogui.click(CropLocationClick[i])
+            SendQuestMssion()
+        else:
+            print("Send Quest Crop Success")   
+
+        CancelMssionBoard()
+        time.sleep(2)
+
+        ClickQuestNew = [157, 277]
+        pyautogui.click(ClickQuestNew, interval = 1)
+        time.sleep(300)
+
+        AttackQuestXY = [340, 233]
+        for i in range(6):
+            AttackQuestMission(AttackQuestXY)
+            AttackQuestXY[1] += 48
+        else:
+            pyautogui.click(828, 576, interval = 1)
+            GoMissonBoard()
+
+            for i in range(len(AttackLocationClick)):
+                pyautogui.click(AttackLocationClick[i])
+                SendQuestMssion()
+            else:
+                print("Send Quest Attack Success")
