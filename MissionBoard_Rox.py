@@ -288,25 +288,54 @@ def SendQuestMssion():
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
 
- 
-def AttackQuestMission(x):
-    pyautogui.click(828, 576, interval = 1)
-    GetQuestMissionBoard1()
-    time.sleep(1)
-    pyautogui.click(x, interval = 1)
-    if GoQuestMissionBoardNew() == True:
-        time.sleep(300)
-        return True
-    else:
-        AttackQuestMission1(x)
-        return True
+def RevievButton():
+    sct = mss.mss()
+    monitor = {"top": top, "left": left, "width": width - left, "height": height - top}
+    while True:
+        img = numpy.array(sct.grab(monitor))
+        scr_remove = img[:,:,:3]
+        CheckQuest_Image = cv2.imread('Image/Board/revive.png')
+        result = cv2.matchTemplate(scr_remove, CheckQuest_Image, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+        w = CheckQuest_Image.shape[1]
+        h = CheckQuest_Image.shape[0]
+        if(max_val >= 0.85):
+            pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
+            return True
+        else:
+            return False
 
 def AttackQuestMission1(x):
     GetQuestMissionBoard1()
     time.sleep(1)
     pyautogui.click(x, interval = 1)
     GoQuestMissionBoard()    
-    return True       
+    return True   
+
+
+def AttackQuestMission(x):
+    if RevievButton() == True:
+        time.sleep(2)
+        GetQuestMissionBoard1()
+        time.sleep(1)
+        pyautogui.click(x, interval = 1)
+        if GoQuestMissionBoardNew() == True:
+            time.sleep(300)
+            return True
+        else:
+            AttackQuestMission1(x)
+            return True        
+    else:
+        pyautogui.click(828, 576, interval = 1)
+        GetQuestMissionBoard1()
+        time.sleep(1)
+        pyautogui.click(x, interval = 1)
+        if GoQuestMissionBoardNew() == True:
+            time.sleep(300)
+            return True
+        else:
+            AttackQuestMission1(x)
+            return True    
 
 time.sleep(1)
 GoMissonBoard()
@@ -441,12 +470,14 @@ if(GetQuestMissionBoard() == True):
     if GetQuestMissionBoard() == True:
         for i in range(len(ComunicationLocationClick)):
             pyautogui.click(ComunicationLocationClick[i])
+            time.sleep(1)
             SendQuestMssion()
         else:
             print("Send Quest Comunication Success")
 
         for i in range(len(CropLocationClick)):
             pyautogui.click(CropLocationClick[i])
+            time.sleep(1)
             SendQuestMssion()
         else:
             print("Send Quest Crop Success")   
@@ -466,8 +497,9 @@ if(GetQuestMissionBoard() == True):
             pyautogui.click(828, 576, interval = 1)
             GoMissonBoard()
 
-            for i in range(len(AttackLocationClick)):
-                pyautogui.click(AttackLocationClick[i])
-                SendQuestMssion()
-            else:
-                print("Send Quest Attack Success")
+            if GetQuestMissionBoard() == True:
+                for i in range(len(AttackLocationClick)):
+                    pyautogui.click(AttackLocationClick[i])
+                    SendQuestMssion()
+                else:
+                    print("Send Quest Attack Success")

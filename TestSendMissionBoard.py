@@ -292,9 +292,9 @@ def SendQuestMssion():
 # pyautogui.click(ClickQuestNew, interval = 1)
 # time.sleep(300)
 
-ClickQuestNew = [157, 277]
-pyautogui.click(ClickQuestNew, interval = 1)
-time.sleep(300)
+# ClickQuestNew = [157, 277]
+# pyautogui.click(ClickQuestNew, interval = 1)
+# time.sleep(300)
 
 def AttackQuestMission(x):
     pyautogui.click(828, 576, interval = 1)
@@ -315,10 +315,20 @@ def AttackQuestMission1(x):
     GoQuestMissionBoard()    
     return True       
 
-AttackQuestXY = [340, 233]
-for i in range(6):
-    AttackQuestMission(AttackQuestXY)
-    AttackQuestXY[1] += 48
-else:
-    pyautogui.click(828, 576, interval = 1)
-    GoMissonBoard()
+def RevievButton():
+    sct = mss.mss()
+    monitor = {"top": top, "left": left, "width": width - left, "height": height - top}
+    while True:
+        img = numpy.array(sct.grab(monitor))
+        scr_remove = img[:,:,:3]
+        CheckQuest_Image = cv2.imread('Image/Board/revive.png')
+        result = cv2.matchTemplate(scr_remove, CheckQuest_Image, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+        w = CheckQuest_Image.shape[1]
+        h = CheckQuest_Image.shape[0]
+        if(max_val >= 0.85):
+            time.sleep(1)
+            pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
+            return True
+
+RevievButton()
