@@ -43,14 +43,45 @@ def py_locateOnscreennoclick(name):
         r = pyautogui.locateOnScreen('Image/' + name, region=(left, top, width - left, height - top), grayscale = True, confidence=.8)
 
 def COC_Mission():
-    py_locateOnscreen("COC/Poring_Open.png")
-    py_locateOnscreen("COC/Canival.png")
+    Poring_Open()
+    Canival()
     py_locateOnscreen("COC/COCMission.png")
     py_locateOnscreen("COC/GO_immediately.png")
     COC_MissionClick()
     ClickMenuQuest(965, 630)
     py_locateOnscreen("COC/CloseCOC.png")
     return True
+
+def Poring_Open():
+    sct = mss.mss()
+    monitor = {"top": top, "left": left, "width": width - left, "height": height - top}
+    while True:
+        img = numpy.array(sct.grab(monitor))
+        scr_remove = img[:,:,:3]
+        COC_Mission = cv2.imread('Image/COC/Poring_Open.png')
+        result = cv2.matchTemplate(scr_remove, COC_Mission, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+        w = COC_Mission.shape[1]
+        h = COC_Mission.shape[0]
+        print(max_val)
+        if(max_val >= 0.75):
+            pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval=0.5)
+            return True
+
+def Canival():
+    sct = mss.mss()
+    monitor = {"top": top, "left": left, "width": width - left, "height": height - top}
+    while True:
+        img = numpy.array(sct.grab(monitor))
+        scr_remove = img[:,:,:3]
+        COC_Mission = cv2.imread('Image/COC/Canival.png')
+        result = cv2.matchTemplate(scr_remove, COC_Mission, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+        w = COC_Mission.shape[1]
+        h = COC_Mission.shape[0]
+        if(max_val >= 0.75):
+            pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval=0.5)
+            return True
 
 def COC_MissionClick():
     sct = mss.mss()
@@ -80,7 +111,6 @@ def COC_MissionnoClick():
         h = COC_Mission.shape[0]
         if(max_val >= 0.75):
             return True
-
 
 def Getquest_Greencolor():
     while True:

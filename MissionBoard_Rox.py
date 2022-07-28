@@ -25,7 +25,7 @@ def ClickPoring():
         h = ClickPoring_Image.shape[0]
         #print(min_val, max_val, min_loc, max_loc, w, h)
         src = img.copy()
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval=0.5)
             time.sleep(0.5)
             return True
@@ -42,7 +42,7 @@ def ClickCarnival():
         w = ClickCanival_Image.shape[1]
         h = ClickCanival_Image.shape[0]
         src = img.copy()
-        if(max_val >= 0.80):
+        if(max_val >= 0.7):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval=0.5)
             time.sleep(0.5)
             return True
@@ -60,7 +60,7 @@ def COCMission():
         h = MissionBoardIcon_Image.shape[0]
         # print(min_val, max_val, min_loc, max_loc, w, h)
         src = img.copy()
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval=0.5)
             return True
 
@@ -77,7 +77,7 @@ def GoCOC_function():
         h = GoCoc_Image.shape[0]
         # print(min_val, max_val, min_loc, max_loc, w, h)
         src = img.copy()
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval=0.5)
             return True
 
@@ -118,7 +118,7 @@ def GetQuestMissionBoard():
         h = QuestBounty_Image.shape[0]
         #print(min_val, max_val, min_loc, max_loc, w, h)
         src = img.copy()
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             return True
 
 def GetQuestMissionBoard1():
@@ -134,7 +134,7 @@ def GetQuestMissionBoard1():
         h = Questicon_Image.shape[0]
         #print(min_val, max_val, min_loc, max_loc, w, h, "Board")
         src = img.copy()
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
 
@@ -151,7 +151,7 @@ def GoQuestMissionBoard():
         w = GoQuestMissionBoard_Image.shape[1]
         h = GoQuestMissionBoard_Image.shape[0]
         #print(min_val, max_val, min_loc, max_loc, w, h)
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
 
@@ -168,7 +168,7 @@ def GoQuestMissionBoardNew():
         w = GoQuestMissionBoard_Image.shape[1]
         h = GoQuestMissionBoard_Image.shape[0]
         #print(min_val, max_val, min_loc, max_loc, w, h)
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
         else:
@@ -188,7 +188,7 @@ def NextCommunicationNPC():
         w = NextQuesticon_Image.shape[1]
         h = NextQuesticon_Image.shape[0]
         # print(min_val, max_val, min_loc, max_loc, w, h)
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             time.sleep(0.5)
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
@@ -205,7 +205,7 @@ def CancelMssionBoard():
         w = CancelMissionBoard_Image.shape[1]
         h = CancelMissionBoard_Image.shape[0]
         # print(min_val, max_val, min_loc, max_loc, w, h)
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
 
@@ -220,7 +220,7 @@ def CropRox():
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
         w = CheckQuest_Image.shape[1]
         h = CheckQuest_Image.shape[0]
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
 
@@ -299,7 +299,7 @@ def RevievButton():
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
         w = CheckQuest_Image.shape[1]
         h = CheckQuest_Image.shape[0]
-        if(max_val >= 0.85):
+        if(max_val >= 0.75):
             pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
             return True
         else:
@@ -357,7 +357,7 @@ if(GetQuestMissionBoard() == True):
     CommunicationQuest = 0
     CommunicationArray = []
     ComunicationLocationClick = [[]]
-    threshold = 0.85
+    threshold = 0.75
     yloc, xloc = np.where(result >= threshold)
     for (x, y) in zip(xloc, yloc):
         CommunicationArray.append([int(x), int(y), int(w), int(h)])
@@ -382,7 +382,7 @@ if(GetQuestMissionBoard() == True):
 
     CropQuest = 0
     CropQuestArray = []
-    threshold = 0.85
+    threshold = 0.75
     CropLocationClick = [[]]
     yloc, xloc = np.where(result >= threshold)
     for (x, y) in zip(xloc, yloc):
@@ -409,7 +409,7 @@ if(GetQuestMissionBoard() == True):
     AttackQuest = 0
     AttackQuestArray = []
     AttackLocationClick = [[]]
-    threshold = 0.85
+    threshold = 0.75
     yloc, xloc = np.where(result >= threshold)
     for (x, y) in zip(xloc, yloc):
         AttackQuestArray.append([int(x), int(y), int(w), int(h)])
