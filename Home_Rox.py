@@ -11,9 +11,11 @@ def SendQuestMssion():
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
         w = CheckQuest_Image.shape[1]
         h = CheckQuest_Image.shape[0]
-        if(max_val >= 0.75):
-            pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
-            return True
+        cv2.imshow(scr_remove)
+        # if(max_val >= 0.75):
+        #     pyautogui.click(x = max_loc[0] + left + (w / 2), y = max_loc[1] + top  + (h / 2), interval = 0.5)
+        #     return True
+
 
 # ------------------------------------------------ Daily Quest -----------------------------------------#
 # Quest_Fishing()
